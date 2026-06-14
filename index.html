@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>軽井沢の旅 — Jun. 19–20</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400&display=swap');
+
+  :root {
+    --green:   #2C4A3E;
+    --cream:   #F7F3EC;
+    --beige:   #E8E0D4;
+    --terra:   #C4714A;
+    --charcoal:#333333;
+    --muted:   #888;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--green);
+    color: var(--cream);
+    padding: 72px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    right: -60px; bottom: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+  .cover-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: rgba(247,243,236,.55);
+    margin-bottom: 28px;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: .02em;
+    margin-bottom: 6px;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: var(--terra);
+  }
+  .cover-sub {
+    font-size: 13px;
+    color: rgba(247,243,236,.65);
+    letter-spacing: .1em;
+    margin-bottom: 48px;
+  }
+  .cover-dates {
+    display: flex;
+    gap: 32px;
+  }
+  .cover-date-block .label {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(247,243,236,.45);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .cover-date-block .date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+  }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    background: var(--terra);
+    color: var(--cream);
+    padding: 16px 40px;
+    font-size: 12px;
+    letter-spacing: .12em;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  /* ── DAY SECTION ── */
+  .day-section {
+    padding: 52px 40px 40px;
+    border-bottom: 1px solid var(--beige);
+  }
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--beige);
+  }
+  .day-meta {
+    border-left: 2px solid var(--terra);
+    padding-left: 16px;
+  }
+  .day-label {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--green);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--beige);
+  }
+  .event {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .event:last-child { margin-bottom: 0; }
+  .event::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 8px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 1.5px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--green);
+  }
+  .event.highlight::before {
+    background: var(--terra);
+    box-shadow: 0 0 0 1px var(--terra);
+  }
+  .event-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: .15em;
+    color: var(--terra);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .event-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+  .event-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .event-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--terra);
+    border: 1px solid var(--terra);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+  }
+
+  /* ── TRAIN CARD ── */
+  .train-card {
+    background: var(--green);
+    color: var(--cream);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .train-station {
+    text-align: center;
+  }
+  .train-station .stn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    display: block;
+  }
+  .train-station .time {
+    font-size: 13px;
+    color: var(--terra);
+    letter-spacing: .08em;
+  }
+  .train-arrow {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(247,243,236,.45);
+    letter-spacing: .2em;
+    position: relative;
+  }
+  .train-arrow::before, .train-arrow::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    height: 1px;
+    background: rgba(247,243,236,.2);
+  }
+  .train-arrow::before { width: 40px; margin-left: -20px; }
+  .train-name {
+    font-size: 10px;
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(247,243,236,.5);
+  }
+  .train-duration {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--cream);
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--beige);
+    border-left: 3px solid var(--terra);
+    padding: 16px 20px;
+    margin: 20px 0 32px;
+    border-radius: 0 4px 4px 0;
+  }
+  .highlight-box .hb-label {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .highlight-box p {
+    font-size: 13px;
+    color: var(--charcoal);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 36px 40px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .1em;
+    font-style: italic;
+  }
+  footer span {
+    color: var(--terra);
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<header class="cover">
+  <p class="cover-eyebrow">Travel Itinerary — Karuizawa</p>
+  <h1 class="cover-title">軽井沢、<br><em>ふたりの旅。</em></h1>
+  <p class="cover-sub">ツルヤの食材で、ヴィラで料理する</p>
+  <div class="cover-dates">
+    <div class="cover-date-block">
+      <span class="label">Departure</span>
+      <span class="date">Jun 19, Thu</span>
+    </div>
+    <div class="cover-date-block">
+      <span class="label">Return</span>
+      <span class="date">Jun 20, Fri</span>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  新鮮な野菜と肉を買って、大きなキッチンで一緒につくる。それだけでいい旅になる。
+</div>
+
+<!-- DAY 1 -->
+<section class="day-section">
+  <div class="day-header">
+    <span class="day-number">01</span>
+    <div class="day-meta">
+      <span class="day-label">Day One — Jun 19</span>
+      <span class="day-title">到着、買い出し、料理と乾杯</span>
+    </div>
+  </div>
+
+  <!-- 新幹線カード -->
+  <div class="train-card">
+    <div class="train-station">
+      <span class="stn">上野</span>
+      <span class="time">10:39</span>
+    </div>
+    <div class="train-arrow">
+      <span class="train-name">北陸新幹線 かがやき</span>
+      <span class="train-duration">57 min</span>
+    </div>
+    <div class="train-station">
+      <span class="stn">軽井沢</span>
+      <span class="time">11:36</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event">
+      <span class="event-time">〜 12:00</span>
+      <p class="event-title">川上庵でお蕎麦ランチ</p>
+      <p class="event-desc">軽井沢本店は旧軽銀座エリア。鴨せいろや天ぷら蕎麦が人気。混みやすいので早めに入るのがベター。</p>
+      <span class="event-tag">Lunch</span>
+    </div>
+
+    <div class="event highlight">
+      <span class="event-time">〜 14:00</span>
+      <p class="event-title">ツルヤ 軽井沢店で買い出し</p>
+      <p class="event-desc">長野の野菜・地元の肉・信州ワイン・オリジナル商品もチェック。夕食のステーキ食材を中心に、朝ごはん用の食材も忘れずに。</p>
+      <span class="event-tag">★ Main Event</span>
+    </div>
+
+    <div class="event">
+      <span class="event-time">〜 15:30</span>
+      <p class="event-title">ヴィラへチェックイン</p>
+      <p class="event-desc">大きなキッチン・サウナ・ジャグジー完備。荷物を置いたらまずはゆっくり一息。</p>
+    </div>
+
+    <div class="event highlight">
+      <span class="event-time">夕方〜</span>
+      <p class="event-title">ふたりでキッチンに立つ</p>
+      <p class="event-desc">役割分担して一緒につくる時間そのものが旅の目玉。ステーキは焼き加減を相談しながら。</p>
+      <span class="event-tag">Dinner</span>
+    </div>
+
+    <div class="highlight-box">
+      <span class="hb-label">Tonight's Menu idea</span>
+      <p>信州牛のステーキ／ローストポテト／グリル野菜 × 信州ワイン<br>デザートはツルヤで見つけたもので</p>
+    </div>
+
+    <div class="event">
+      <span class="event-time">夜</span>
+      <p class="event-title">乾杯 → サウナ or ジャグジー → おやすみ</p>
+      <p class="event-desc">外の空気を感じながら、ゆっくり過ごす夜。東京の喧騒が遠くなる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- DAY 2 -->
+<section class="day-section">
+  <div class="day-header">
+    <span class="day-number">02</span>
+    <div class="day-meta">
+      <span class="day-label">Day Two — Jun 20</span>
+      <span class="day-title">朝ごはん、温泉、帰途</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event">
+      <span class="event-time">朝</span>
+      <p class="event-title">自分たちで朝ごはん</p>
+      <p class="event-desc">ツルヤで買った食材でサンドイッチを。コーヒーを淹れて、窓の外の緑を眺めながらゆったりと。</p>
+      <span class="event-tag">Breakfast</span>
+    </div>
+
+    <div class="event highlight">
+      <span class="event-time">午前</span>
+      <p class="event-title">ミスタードーナツ佐久店 — もっちゅりんいちご</p>
+      <p class="event-desc">彼女が絶対食べたいやつ。佐久平駅そばの店舗で、ここ限定でもっちゅりんいちごが手に入る。</p>
+      <span class="event-tag">★ Must</span>
+    </div>
+
+    <div class="event highlight">
+      <span class="event-time">〜 13:00</span>
+      <p class="event-title">星野温泉 トンボの湯</p>
+      <p class="event-desc">内湯・露天・サウナ完備。軽井沢を代表する日帰り温泉。ゆっくり浸かって旅の疲れを流す。営業 10:00〜22:00。</p>
+      <span class="event-tag">Onsen</span>
+    </div>
+
+    <div class="event">
+      <span class="event-time">昼</span>
+      <p class="event-title">ランチ（未定 — 気分で決める）</p>
+      <p class="event-desc">温泉の帰りに立ち寄れる場所で、ふたりで決める余白を残しておく。</p>
+    </div>
+
+    <!-- 帰りの新幹線カード -->
+    <div class="train-card" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="train-station">
+        <span class="stn">軽井沢</span>
+        <span class="time">16:48</span>
+      </div>
+      <div class="train-arrow">
+        <span class="train-name">北陸新幹線 かがやき</span>
+        <span class="train-duration">58 min</span>
+      </div>
+      <div class="train-station">
+        <span class="stn">上野</span>
+        <span class="time">17:46</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="highlight-box" style="margin-top: 28px; margin-bottom: 0;">
+    <span class="hb-label">After arriving Tokyo</span>
+    <p>彼女の家へ。荷物を置いて、今日のことを話しながら一緒にいる。それが旅の終わり方。</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  軽井沢 Jun 19–20, 2025 &nbsp;—&nbsp; <span>ふたりの旅</span>
+</footer>
+
+</body>
+</html>
